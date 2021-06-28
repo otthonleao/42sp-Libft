@@ -6,7 +6,7 @@
 /*   By: orodrigo <orodrigo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 03:26:31 by orodrigo          #+#    #+#             */
-/*   Updated: 2021/06/16 03:11:06 by orodrigo         ###   ########.fr       */
+/*   Updated: 2021/06/28 19:30:34 by orodrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 int	ft_isprint(int c)
 {
-	unsigned char	char_c;
-
-	char_c = (unsigned char)c;
-	if (char_c >= 32 && char_c <= 126)
+	if (c >= 32 && c <= 126)
 		return (1);
 	return (0);
 }
