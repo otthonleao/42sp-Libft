@@ -6,7 +6,7 @@
 #    By: orodrigo <orodrigo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/14 15:52:31 by orodrigo          #+#    #+#              #
-#    Updated: 2021/07/03 15:13:18 by orodrigo         ###   ########.fr        #
+#    Updated: 2021/07/03 15:46:55 by orodrigo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,30 +24,30 @@ C_SOURCES = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 C_SOURCES_BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
 					ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
-OBJ = $(C_SOURCES:.c=.o)
+OBJ = $(subst .c,.o,$(C_SOURCES))
 
-OBJ_BONUS = $(C_SOURCES_BONUS:.c=.o)
+OBJ_BONUS = $(subst .c,.o,$(C_SOURCES_BONUS))
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@ar rcs $@ $^ 
+$(NAME):
+	@gcc -Wall -Wextra -Werror -c $(C_SOURCES)
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
 
-$(OBJ): $(C_SOURCES)
-	@gcc -c $^ -Wall -Wextra -Werror
+bonus: $(OBJ_BONUS)
 
-all_bonus: $(NAME_BONUS)
-
-$(NAME_BONUS): $(OBJ_BONUS)
-	@ar rcs $@ $ˆ
-
-$(OBJ_BONUS): $(C_SOURCES_BONUS)
-	@gcc -c $^ -Wall -Wextra -Werror
+$(OBJ_BONUS):
+	@gcc -Wall -Wextra -Werror -c $(C_SOURCES) $(C_SOURCES_BONUS)
+	@ar rc $(NAME) $(OBJ) $(OBJ_BONUS)
+	@ranlib $(NAME)
 
 clean:
-	@rm -f $(OBJ) $(OBJ_BONUS)
+	@/bin/rm -f $(OBJ) $(OBJ_BONUS)
 
 fclean: clean
-	@rm -f $(NAME) $(NAME_BONUS)
-
+	@/bin/rm -f $(NAME) a.out
+	
 re: fclean all
+
+.PHONY: clean fclean all re bonus
