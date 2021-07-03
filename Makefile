@@ -6,7 +6,7 @@
 #    By: orodrigo <orodrigo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/14 15:52:31 by orodrigo          #+#    #+#              #
-#    Updated: 2021/07/03 12:43:12 by orodrigo         ###   ########.fr        #
+#    Updated: 2021/07/03 15:13:18 by orodrigo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,14 @@ C_SOURCES = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 			ft_split.c ft_strchr.c ft_strdup.c ft_strjoin.c ft_strlcat.c \
 			ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c \
 			ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c \
-			ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
-			ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
+			
+			
+C_SOURCES_BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
+					ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
 OBJ = $(C_SOURCES:.c=.o)
+
+OBJ_BONUS = $(C_SOURCES_BONUS:.c=.o)
 
 all: $(NAME)
 
@@ -32,10 +36,18 @@ $(NAME): $(OBJ)
 $(OBJ): $(C_SOURCES)
 	@gcc -c $^ -Wall -Wextra -Werror
 
+all_bonus: $(NAME_BONUS)
+
+$(NAME_BONUS): $(OBJ_BONUS)
+	@ar rcs $@ $ˆ
+
+$(OBJ_BONUS): $(C_SOURCES_BONUS)
+	@gcc -c $^ -Wall -Wextra -Werror
+
 clean:
-	@rm -f $(OBJ)
+	@rm -f $(OBJ) $(OBJ_BONUS)
 
 fclean: clean
-	@rm -f $(NAME)
+	@rm -f $(NAME) $(NAME_BONUS)
 
 re: fclean all
